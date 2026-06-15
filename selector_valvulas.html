@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selector de Válvulas de Control</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --panel: #1a1d27;
+      --panel2: #21253a;
+      --border: #2e3355;
+      --accent: #4a9eff;
+      --accent2: #00d4aa;
+      --warn: #ffb347;
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --red: #ff5c7a;
+      --green: #00d4aa;
+      --radius: 10px;
+      --font: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .topbar h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .topbar span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-left: auto;
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    /* MAIN LAYOUT */
+    .layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 0;
+      height: calc(100vh - 65px);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    input[type=number],
+    select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 12px;
+    }
+
+    input[type=number]:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    select option {
+      background: #1a1d27;
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-calc {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-calc:hover {
+      background: #3a8eef;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+    }
+
+    /* CV RESULT */
+    .cv-badge {
+      background: linear-gradient(135deg, #1a2a4a 0%, #0f1117 100%);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cv-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .cv-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* PRESSURE BADGE */
+    .press-badge {
+      background: linear-gradient(135deg, #1a3a2a 0%, #0f1117 100%);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: var(--text);
+      margin-top: 8px;
+    }
+
+    .press-badge b {
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* RESULTS TABLE */
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .results-count {
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+
+    th {
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(46, 51, 85, 0.5);
+      vertical-align: middle;
+    }
+
+    tr.result-row {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    tr.result-row:hover {
+      background: rgba(74, 158, 255, 0.06);
+    }
+
+    tr.result-row.selected {
+      background: rgba(74, 158, 255, 0.12);
+      border-left: 3px solid var(--accent);
+    }
+
+    .apertura-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+    }
+
+    .bar-pct {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    th.sortable .sort-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    th.sortable:hover .sort-btn {
+      color: var(--text);
+    }
+
+    th.sortable.sort-asc .sort-btn {
+      color: var(--accent);
+      transform: rotate(0deg);
+    }
+
+    th.sortable.sort-desc .sort-btn {
+      color: var(--accent);
+      transform: rotate(180deg);
+    }
+
+    .badge-clase {
+      background: rgba(74, 158, 255, 0.15);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    /* VALVE DRAWING SECTION */
+    .valve-panel {
+      display: grid;
+      grid-template-columns: 25% 75%;
+      gap: 20px;
+    }
+
+    .valve-card {
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .valve-title {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    #valveSvg {
+      width: 100%;
+      height: 260px;
+      display: block;
+    }
+
+    /* FLOW GAUGES */
+    .gauges {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .gauge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gauge-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .gauge-info {
+      flex: 1;
+    }
+
+    .gauge-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .gauge-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .gauge-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .gauge-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      gap: 12px;
+    }
+
+    .empty-state svg {
+      opacity: 0.3;
+    }
+
+    .empty-state p {
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    /* LOADING OVERLAY */
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 17, 23, 0.95);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #loadingOverlay p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    #loadingOverlay h3 {
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    /* FILE DIALOG */
+    #fileDialog {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .file-window {
+      background: #252836;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 520px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .file-titlebar {
+      background: #1e2130;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .win-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .file-titlebar h4 {
+      font-size: 0.82rem;
+      margin-left: 6px;
+      color: var(--muted);
+    }
+
+    .file-body {
+      padding: 16px;
+    }
+
+    .file-path-bar {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-family: monospace;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .file-item:hover {
+      background: rgba(74, 158, 255, 0.1);
+    }
+
+    .file-item.loading {
+      background: rgba(74, 158, 255, 0.15);
+    }
+
+    .file-icon {
+      font-size: 1rem;
+    }
+
+    .file-size {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .file-dialog-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn-sm {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .btn-sm.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* SELECTED VALVE DETAIL */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .detail-item {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+    }
+
+    .detail-item .d-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .detail-item .d-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .no-select {
+      user-select: none;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .valve-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loadingOverlay">
+    <div style="font-size: 2rem">⚙️</div>
+    <h3>Selector de Válvulas de Control</h3>
+    <p id="loadingMsg">Haz clic para cargar los archivos de base de datos</p>
+    <button class="btn-calc" style="margin-top:12px;width:auto;padding:12px 28px" onclick="startup()">📂 Cargar archivos
+      JSON</button>
+  </div>
+
+  <!-- FILE DIALOG (simulado) -->
+  <div id="fileDialog">
+    <div class="file-window">
+      <div class="file-titlebar no-select">
+        <div class="win-btn" style="background:#ff5f57"></div>
+        <div class="win-btn" style="background:#febc2e"></div>
+        <div class="win-btn" style="background:#28c840"></div>
+        <h4>Abrir archivos de base de datos</h4>
+      </div>
+      <div class="file-body">
+        <div class="file-path-bar">📁 ./ — Directorio actual</div>
+        <div class="file-list" id="fileList"></div>
+      </div>
+      <div class="file-dialog-footer">
+        <button class="btn-sm">Cancelar</button>
+        <button class="btn-sm primary" id="btnOpenFiles">Abrir seleccionados</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+      </svg>
+    </div>
+    <h1>Selector de Válvulas de Control</h1>
+    <span>ASME B16.34</span>
+    <div class="status-dot" title="Datos cargados"></div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR: INPUTS -->
+    <div class="sidebar">
+      <div class="section-label">Parámetros del Proceso</div>
+
+      <div class="card">
+        <div class="row2">
+          <div>
+            <label>Caudal Q (m³/h)</label>
+            <input type="number" id="inputQ" value="45" step="0.1" min="0">
+          </div>
+          <div>
+            <label>ΔP (bar)</label>
+            <input type="number" id="inputDP" value="2.5" step="0.1" min="0.01">
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label>Gravedad Específica Gf</label>
+            <input type="number" id="inputGf" value="1.0" step="0.01" min="0.01">
+          </div>
+          <div>
+            <label>Factor Fp</label>
+            <input type="number" id="inputFp" value="1.0" step="0.01" min="0.01">
+          </div>
+        </div>
+        <div>
+          <label>Unidad de Presión</label>
+          <select id="selectUnidad">
+            <option value="bar" selected>bar</option>
+            <option value="kPa">kPa</option>
+            <option value="psi">psi / psia</option>
+          </select>
+        </div>
+        <div id="cvResult" class="cv-badge" style="display:none">
+          <div>
+            <div class="cv-label">Cv Requerido</div>
+            <div class="cv-value" id="cvValue">—</div>
+          </div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)" opacity="0.4">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="section-label">Material del Cuerpo</div>
+      <div class="card">
+        <label>Material ASME</label>
+        <div id="matCombo" style="position:relative">
+          <div style="position:relative">
+            <input type="text" id="matSearch" placeholder="Escribir o buscar material..." autocomplete="off"
+              style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:8px 32px 8px 12px;font-size:0.88rem;font-family:var(--font);outline:none;margin-bottom:0;transition:border-color 0.2s"
+              oninput="filtrarComboMaterial()" onfocus="abrirComboMaterial()" onkeydown="navComboMaterial(event)">
+            <div id="matClearBtn" onclick="limpiarMaterial()"
+              style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--muted);font-size:0.9rem;line-height:1;padding:2px">
+              ✕</div>
+          </div>
+          <div id="matDropdown"
+            style="display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:#1e2235;border:1px solid var(--accent);border-radius:8px;z-index:200;max-height:220px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+            <div id="matList"></div>
+          </div>
+        </div>
+        <input type="hidden" id="selectMaterial" value="">
+      </div>
+
+      <div class="section-label">Clase de Presión</div>
+      <div class="card">
+        <div class="row2">
+          <div>
+            <label>Clase ASME</label>
+            <select id="selectClase" style="margin-bottom:0">
+              <option value="class_150">Class 150</option>
+              <option value="class_300">Class 300</option>
+              <option value="class_600" selected>Class 600</option>
+              <option value="class_900">Class 900</option>
+              <option value="class_1500">Class 1500</option>
+              <option value="class_2500">Class 2500</option>
+            </select>
+          </div>
+          <div>
+            <label>Temperatura (°C)</label>
+            <input type="number" id="inputTemp" value="100" step="25" min="-200" max="600">
+          </div>
+        </div>
+        <div id="pressureResult" class="press-badge" style="display:none">
+          Presión admisible: <b id="pressValue">—</b> bar
+        </div>
+      </div>
+
+      <button class="btn-calc" onclick="calcular()">⚡ Calcular</button>
+    </div>
+
+    <!-- MAIN: RESULTS + VISUALIZATION -->
+    <div class="main">
+
+      <!-- RESULTS TABLE -->
+      <div class="card">
+        <div class="results-header">
+          <div style="font-size:0.88rem; font-weight:600">Válvulas Adecuadas</div>
+          <span class="results-count" id="resultCount">0 resultados</span>
+        </div>
+        <div id="resultsArea">
+          <div class="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--muted)">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+            </svg>
+            <p>Ingresa los parámetros y presiona <b>Calcular</b></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALVE VISUALIZATION -->
+      <div class="valve-panel" id="valveVizPanel" style="display:none">
+
+        <!-- DRAWING -->
+        <div class="valve-card">
+          <div class="valve-title">Vista de Válvula — Posición del Obturador</div>
+          <svg id="valveSvg" width="400" height="260" viewBox="0 0 320 300" role="img">
+            <title>Válvula de control</title>
+            <desc>Vista esquemática de una válvula de control accionada por un actuador. Un vástago fijo desciende desde
+              el actuador y un obturador móvil se desplaza sobre él para regular el paso del fluido en la celda central
+              de una grid 3x3.</desc>
+
+            <defs>
+              <marker id="flowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.5" markerHeight="3.5"
+                orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </marker>
+            </defs>
+
+            <line id="in1" x1="10" y1="170" x2="90" y2="170" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <line id="in2" x1="10" y1="180" x2="90" y2="180" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <line id="in3" x1="10" y1="190" x2="90" y2="190" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <text x="10" y="240" fill="#8892b0" font-size="11" font-family="monospace">INLET</text>
+
+            <line id="out1" x1="230" y1="170" x2="310" y2="170" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <line id="out2" x1="230" y1="180" x2="310" y2="180" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <line id="out3" x1="230" y1="190" x2="310" y2="190" stroke="#00d4aa" stroke-width="3"
+              marker-end="url(#flowhead)" />
+            <text x="245" y="240" fill="#8892b0" font-size="11" font-family="monospace">OUTLET</text>
+
+            <rect x="100" y="120" width="40" height="40" fill="#2a3560" />
+            <rect x="180" y="120" width="40" height="40" fill="#2a3560" />
+
+            <rect x="100" y="160" width="40" height="40" fill="#00d4aa" />
+            <rect x="180" y="160" width="40" height="40" fill="#00d4aa" />
+
+            <rect x="100" y="200" width="120" height="40" fill="#2a3560" />
+
+            <rect id="zone-center" x="140" y="160" width="40" height="40" fill="#00d4aa" />
+
+            <line x1="140" y1="120" x2="180" y2="120" stroke="#4a9eff" stroke-width="1" />
+
+            <rect id="stem" x="150" y="80" width="20" height="80" fill="#8892b0" />
+
+            <rect id="plug" x="140" y="160" width="40" height="40" fill="#ffb347" />
+
+            <line x1="100" y1="120" x2="140" y2="120" stroke="#4a9eff" stroke-width="2" />
+            <line x1="180" y1="120" x2="220" y2="120" stroke="#4a9eff" stroke-width="2" />
+            <line x1="100" y1="120" x2="100" y2="240" stroke="#4a9eff" stroke-width="2" />
+            <line x1="220" y1="120" x2="220" y2="240" stroke="#4a9eff" stroke-width="2" />
+            <line x1="100" y1="240" x2="220" y2="240" stroke="#4a9eff" stroke-width="2" />
+            <line x1="100" y1="160" x2="140" y2="160" stroke="#4a9eff" stroke-width="1" />
+            <line x1="180" y1="160" x2="220" y2="160" stroke="#4a9eff" stroke-width="1" />
+            <line x1="100" y1="200" x2="220" y2="200" stroke="#4a9eff" stroke-width="1" />
+            <line x1="140" y1="120" x2="140" y2="160" stroke="#4a9eff" stroke-width="1" />
+            <line x1="180" y1="120" x2="180" y2="160" stroke="#4a9eff" stroke-width="1" />
+
+            <rect x="115" y="30" width="90" height="50" rx="8" fill="#1e2a4a" stroke="#4a9eff" stroke-width="2" />
+            <text x="160" y="55" text-anchor="middle" dominant-baseline="central" fill="#8892b0" font-size="11"
+              font-weight="bold" font-family="monospace">ACTUADOR</text>
+
+            <text id="statusText" x="160" y="285" text-anchor="middle" font-size="13" font-weight="bold"
+              font-family="monospace" fill="#ffb347"></text>
+          </svg>
+          <div style="margin-top:10px; font-size:0.75rem; color:var(--muted); text-align:center" id="valveCaption">
+          </div>
+        </div>
+
+        <!-- DETAIL + GAUGES -->
+        <div class="valve-card">
+          <div class="valve-title">Datos del Punto de Operación</div>
+          <div class="detail-grid" id="detailGrid"></div>
+          <div style="height:14px"></div>
+          <div class="gauges" id="gaugesArea"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ===== EMBEDDED DATA =====
+    window.DB_VALVULAS = window.DB_VALVULAS || {};
+    window.DB_ESPEC = window.DB_ESPEC || {};
+    window.DB_HISTORICO = window.DB_HISTORICO || {};
+
+    // ===== SIMULATION: FILE DIALOG =====
+    function showFileDialog(files, onComplete) {
+      const dialog = document.getElementById('fileDialog');
+      const list = document.getElementById('fileList');
+      dialog.style.display = 'flex';
+
+      list.innerHTML = files.map((f, i) => `
+    <div class="file-item" id="fitem_${i}">
+      <span class="file-icon">📄</span>
+      <span>${f.name}</span>
+      <span class="file-size">${f.size}</span>
+    </div>
+  `).join('');
+
+      document.getElementById('btnOpenFiles').onclick = () => {
+        dialog.style.display = 'none';
+        onComplete();
+      };
+    }
+
+    // ===== STARTUP =====
+    async function startup() {
+      const overlay = document.getElementById('loadingOverlay');
+      const msg = document.getElementById('loadingMsg');
+
+      msg.textContent = 'Selecciona los archivos JSON de la base de datos...';
+
+      // Crear input de archivos y esperar selección
+      await new Promise((resolve) => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = '.json';
+
+        input.onchange = async () => {
+          const files = Array.from(input.files);
+          if (!files.length) { resolve(); return; }
+
+          overlay.style.display = 'flex';
+
+          for (const file of files) {
+            const name = file.name.toLowerCase();
+            msg.textContent = `Cargando ${file.name}...`;
+            try {
+              const text = await file.text();
+              const data = JSON.parse(text);
+              if (name.includes('valvula')) {
+                window.DB_VALVULAS = data;
+              } else if (name.includes('historico')) {
+                window.DB_HISTORICO = data;
+              } else if (name.includes('especif')) {
+                window.DB_ESPEC = data;
+              }
+            } catch (e) {
+              console.error(`Error leyendo ${file.name}:`, e);
+            }
+          }
+
+          msg.textContent = 'Indexando materiales...';
+          buildMaterialSelector();
+          await sleep(300);
+          overlay.style.display = 'none';
+          resolve();
+        };
+
+        // Abrir el selector de archivos
+        input.click();
+      });
+    }
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    // ===== MATERIAL COMBO =====
+    function buildMaterialSelector() {
+      const allMaterials = [];
+
+      for (const [cargaKey, cargaVal] of Object.entries(DB_HISTORICO)) {
+        for (const mat of cargaVal.materiales) {
+          const cleanName = mat.replace(/\s*\([^)]+\)/g, '').trim();
+          allMaterials.push({ carga: cargaKey, raw: mat, clean: cleanName });
+        }
+      }
+
+      allMaterials.sort((a, b) => a.clean.localeCompare(b.clean));
+      window._allMaterials = allMaterials;
+      renderComboList(allMaterials);
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!document.getElementById('matCombo').contains(e.target)) {
+          document.getElementById('matDropdown').style.display = 'none';
+        }
+      });
+
+      // dummy loop to not break original closing brace below — replaced inline
+      const _dummy = [];
+      for (const m of _dummy) {
+        const opt = document.createElement('option');
+        opt.value = m.carga + '|' + m.raw;
+        opt.textContent = m.clean;
+        sel.appendChild(opt);
+      }
+    }
+
+    // ===== COMBO MATERIAL HELPERS =====
+    let _comboHighlight = -1;
+
+    function renderComboList(items) {
+      const list = document.getElementById('matList');
+      if (!items.length) {
+        list.innerHTML = '<div style="padding:12px 14px;color:var(--muted);font-size:0.82rem">Sin resultados</div>';
+        return;
+      }
+      list.innerHTML = items.map((m, i) => `
+        <div class="mat-opt" data-idx="${i}" data-value="${m.carga}|${m.raw}"
+          onmousedown="elegirMaterial('${m.carga}|${m.raw.replace(/'/g, "\\'")}','${m.clean.replace(/'/g, "\\'")}')"
+          onmouseover="highlightCombo(${i})"
+          style="padding:9px 14px;cursor:pointer;font-size:0.83rem;border-bottom:1px solid rgba(46,51,85,0.4);transition:background 0.1s">
+          ${m.clean}
+        </div>`).join('');
+      _comboHighlight = -1;
+    }
+
+    function abrirComboMaterial() {
+      const q = document.getElementById('matSearch').value.toLowerCase();
+      const filtered = (window._allMaterials || []).filter(m => !q || m.clean.toLowerCase().includes(q));
+      renderComboList(filtered);
+      document.getElementById('matDropdown').style.display = 'block';
+      document.getElementById('matSearch').style.borderColor = 'var(--accent)';
+    }
+
+    function filtrarComboMaterial() {
+      const q = document.getElementById('matSearch').value.toLowerCase();
+      const filtered = (window._allMaterials || []).filter(m => m.clean.toLowerCase().includes(q));
+      renderComboList(filtered);
+      document.getElementById('matDropdown').style.display = 'block';
+      document.getElementById('selectMaterial').value = '';
+      document.getElementById('matClearBtn').style.display = q ? 'block' : 'none';
+    }
+
+    function elegirMaterial(value, label) {
+      document.getElementById('selectMaterial').value = value;
+      document.getElementById('matSearch').value = label;
+      document.getElementById('matDropdown').style.display = 'none';
+      document.getElementById('matSearch').style.borderColor = 'var(--green)';
+      document.getElementById('matClearBtn').style.display = 'block';
+    }
+
+    function limpiarMaterial() {
+      document.getElementById('selectMaterial').value = '';
+      document.getElementById('matSearch').value = '';
+      document.getElementById('matSearch').style.borderColor = 'var(--border)';
+      document.getElementById('matClearBtn').style.display = 'none';
+      document.getElementById('pressureResult').style.display = 'none';
+      document.getElementById('matDropdown').style.display = 'none';
+    }
+
+    function highlightCombo(idx) {
+      _comboHighlight = idx;
+      document.querySelectorAll('.mat-opt').forEach((el, i) => {
+        el.style.background = i === idx ? 'rgba(74,158,255,0.18)' : '';
+        el.style.color = i === idx ? 'var(--accent)' : '';
+      });
+    }
+
+    function navComboMaterial(e) {
+      const opts = document.querySelectorAll('.mat-opt');
+      if (!opts.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        _comboHighlight = Math.min(_comboHighlight + 1, opts.length - 1);
+        highlightCombo(_comboHighlight);
+        opts[_comboHighlight]?.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        _comboHighlight = Math.max(_comboHighlight - 1, 0);
+        highlightCombo(_comboHighlight);
+        opts[_comboHighlight]?.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter' && _comboHighlight >= 0) {
+        e.preventDefault();
+        opts[_comboHighlight]?.dispatchEvent(new MouseEvent('mousedown'));
+      } else if (e.key === 'Escape') {
+        document.getElementById('matDropdown').style.display = 'none';
+      }
+    }
+
+    // ===== MATH: Cv =====
+    function getN1(unidad) {
+      return { 'kPa': 0.0865, 'bar': 0.865, 'psi': 1.00 }[unidad] || 1.00;
+    }
+
+    function calcCv(q, dp, gf, fp, unidad) {
+      const n1 = getN1(unidad);
+      return (q / (n1 * fp)) * Math.sqrt(gf / dp);
+    }
+
+    function interpolarApertura(aperturas, cvTarget) {
+      const puntos = [];
+      for (const [pct, val] of Object.entries(aperturas)) {
+        if (val !== null) {
+          const num = parseFloat(pct.replace('%', ''));
+          puntos.push([num, parseFloat(val)]);
+        }
+      }
+      puntos.sort((a, b) => a[0] - b[0]);
+      if (!puntos.length) return null;
+      const cvMin = puntos[0][1], cvMax = puntos[puntos.length - 1][1];
+      if (cvTarget < cvMin || cvTarget > cvMax) return null;
+      for (let i = 0; i < puntos.length - 1; i++) {
+        const [p1, cv1] = puntos[i], [p2, cv2] = puntos[i + 1];
+        if (cv1 <= cvTarget && cvTarget <= cv2) {
+          if (cv2 === cv1) return p1;
+          return p1 + (cvTarget - cv1) * (p2 - p1) / (cv2 - cv1);
+        }
+      }
+      return null;
+    }
+
+    // ===== PRESSURE LOOKUP =====
+    function getPressureAdmisible(cargaKey, claseName, tempC) {
+      try {
+        const carga = DB_HISTORICO[cargaKey];
+        if (!carga) return null;
+        const si = carga.unidades?.SI;
+        if (!si) return null;
+
+        // Try standard class A first, then special class B
+        for (const className2 of ['standard_class_A', 'special_class_B']) {
+          const tabla = si[className2];
+          if (!tabla || !tabla[claseName]) continue;
+          const temps = tabla.temperaturas;
+          const pressures = tabla[claseName];
+
+          // Find matching temperature
+          let bestIdx = 0;
+          let bestDiff = Infinity;
+          for (let i = 0; i < temps.length; i++) {
+            const tStr = temps[i].toString().toLowerCase();
+            let tVal;
+            if (tStr.includes('min')) tVal = -50;
+            else tVal = parseFloat(tStr);
+            const diff = Math.abs(tVal - tempC);
+            if (diff < bestDiff) { bestDiff = diff; bestIdx = i; }
+          }
+          return pressures[bestIdx];
+        }
+        return null;
+      } catch (e) { return null; }
+    }
+
+    // ===== MAIN CALCULATE =====
+    function calcular() {
+      const q = parseFloat(document.getElementById('inputQ').value);
+      const dp = parseFloat(document.getElementById('inputDP').value);
+      const gf = parseFloat(document.getElementById('inputGf').value);
+      const fp = parseFloat(document.getElementById('inputFp').value);
+      const unidad = document.getElementById('selectUnidad').value;
+      const matVal = document.getElementById('selectMaterial').value;
+      const clase = document.getElementById('selectClase').value;
+      // Extraer el número de clase seleccionada (ej: "class_600" → 600)
+      const claseNum = parseInt(clase.replace('class_', ''), 10);
+      const temp = parseFloat(document.getElementById('inputTemp').value);
+
+      const cvReq = calcCv(q, dp, gf, fp, unidad);
+
+      // Show Cv badge
+      document.getElementById('cvResult').style.display = 'flex';
+      document.getElementById('cvValue').textContent = cvReq.toFixed(3);
+
+      // Pressure result
+      let pressureAdm = null;
+      if (matVal) {
+        const [cargaKey] = matVal.split('|');
+        pressureAdm = getPressureAdmisible(cargaKey, clase, temp);
+        if (pressureAdm !== null) {
+          document.getElementById('pressureResult').style.display = 'block';
+          document.getElementById('pressValue').textContent = pressureAdm;
+        } else {
+          document.getElementById('pressureResult').style.display = 'none';
+        }
+      }
+
+      // Find valid valves
+      const validas = [];
+      for (const item of DB_VALVULAS.valvulas) {
+        const esp = item.especificaciones;
+        for (const fila of item.datos_tabla) {
+          if (fila.coeff_type !== 'Cv') continue;
+
+          // Filtrar por clase de presión de la válvula
+          const claseValvula = (esp.clase_presion || '').toString().trim();
+          const matchCL = claseValvula.match(/CL(\d+)(?:-(\d+))?/i);
+          if (matchCL) {
+            const clMin = parseInt(matchCL[1], 10);
+            const clMax = matchCL[2] ? parseInt(matchCL[2], 10) : clMin;
+            if (claseNum < clMin || claseNum > clMax) continue;
+          }
+          const apertura = interpolarApertura(fila.aperturas, cvReq);
+          if (apertura !== null) {
+            const cvMax = Math.max(...Object.values(fila.aperturas).filter(v => v !== null).map(Number));
+            const cvMin = Math.min(...Object.values(fila.aperturas).filter(v => v !== null).map(Number));
+            validas.push({
+              modelo: esp.modelo || 'N/A',
+              clase: esp.clase_presion || 'N/A',
+              jaula: esp.tipo_jaula || 'N/A',
+              size: fila.valve_size_inches,
+              port: fila.port_diameter_inches,
+              portMm: fila.port_diameter_mm,
+              apertura: apertura,
+              cvReq: cvReq,
+              cvMax: cvMax,
+              cvMin: cvMin,
+              aperturas: fila.aperturas,
+              pressureAdm: pressureAdm
+            });
+          }
+        }
+      }
+
+      renderResults(validas, q, dp);
+    }
+
+    // ===== RENDER RESULTS =====
+    function renderResults(validas, q, dp) {
+      const area = document.getElementById('resultsArea');
+      document.getElementById('resultCount').textContent = validas.length + ' resultado' + (validas.length !== 1 ? 's' : '');
+
+      // Build model filter options
+      const modelos = [...new Set(validas.map(v => v.modelo))];
+      const filtroHtml = `
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+      <div style="font-size:0.76rem;color:var(--muted)">Filtrar modelo:</div>
+      <select id="filtroModelo" onchange="aplicarFiltroOrden()" style="margin-bottom:0;width:auto;padding:5px 10px;font-size:0.78rem">
+        <option value="">Todos</option>
+        ${'${modelos.map(m => `<option value="${m}">${m}</option>`).join("")}'}
+      </select>
+      <div style="font-size:0.76rem;color:var(--muted);margin-left:8px">Ordenar por apertura:</div>
+      <select id="ordenApertura" onchange="aplicarFiltroOrden()" style="margin-bottom:0;width:auto;padding:5px 10px;font-size:0.78rem">
+        <option value="">Sin ordenar</option>
+        <option value="asc">↑ Menor primero</option>
+        <option value="desc">↓ Mayor primero</option>
+      </select>
+    </div>
+    <div id="tablaResultados"></div>
+  `;
+      area.innerHTML = filtroHtml;
+      window._valvulasTodas = validas;
+      window._q = q;
+      window._dp = dp;
+      aplicarFiltroOrden();
+    }
+
+    // ===== SELECT VALVE =====
+    function selectValve(idx) {
+      document.querySelectorAll('.result-row').forEach(r => r.classList.remove('selected'));
+      const row = document.getElementById('row_' + idx);
+      if (row) row.classList.add('selected');
+
+      const v = window._valvulas[idx];
+      if (!v) return;
+
+      document.getElementById('valveVizPanel').style.display = 'grid';
+      renderValveDrawing(v);
+      renderDetails(v);
+    }
+
+    // ===== VALVE SVG DRAWING =====
+    function renderValveDrawing(v) {
+      const openPct = v.apertura / 100; // 0 = cerrado, 1 = abierto
+
+      const cellTop = 120;
+      const cellBottom = 160;
+      const travel = cellBottom - cellTop;
+
+      const plug = document.getElementById('plug');
+      const zoneCenter = document.getElementById('zone-center');
+      const statusText = document.getElementById('statusText');
+
+      const offset = (1 - openPct) * travel;
+      const plugY = cellBottom - travel + offset;
+      plug.setAttribute('y', plugY);
+
+      if (openPct <= 0) {
+        zoneCenter.setAttribute('fill', '#ffb347');
+      } else {
+        zoneCenter.setAttribute('fill', '#00d4aa');
+      }
+
+      // Flow arrows opacity based on opening
+      const flowAlpha = 0.2 + openPct * 0.8;
+      ['in1', 'in2', 'in3', 'out1', 'out2', 'out3'].forEach(id => {
+        document.getElementById(id).style.opacity = flowAlpha;
+      });
+
+      // Status text
+      const statusLabel = v.apertura < 10 ? 'CERRADA' : v.apertura > 90 ? 'ABIERTA' : 'PARCIAL';
+      const statusColor = v.apertura < 10 ? '#ff5c7a' : v.apertura > 90 ? '#00d4aa' : '#ffb347';
+      statusText.textContent = `${v.apertura.toFixed(1)}% — ${statusLabel}`;
+      statusText.setAttribute('fill', statusColor);
+
+      document.getElementById('valveCaption').textContent =
+        `Modelo ${v.modelo} | Tamaño ${v.size}" | Puerto ${v.port}" | Cv req. ${v.cvReq.toFixed(2)}`;
+    }
+
+    // ===== RENDER DETAILS =====
+    function renderDetails(v) {
+      const pctColor = v.apertura > 80 ? '#ff5c7a' : v.apertura > 50 ? '#ffb347' : '#00d4aa';
+
+      document.getElementById('detailGrid').innerHTML = `
+    <div class="detail-item" style="border-color:var(--accent)">
+      <div class="d-label">Apertura</div>
+      <div class="d-value" style="color:${pctColor}">${v.apertura.toFixed(1)}%</div>
+    </div>
+    <div class="detail-item" style="border-color:var(--accent)">
+      <div class="d-label">Cerrado</div>
+      <div class="d-value">${(100 - v.apertura).toFixed(1)}%</div>
+    </div>
+    <div class="detail-item" style="border-color:var(--green)">
+      <div class="d-label">Cv Req.</div>
+      <div class="d-value" style="color:var(--accent)">${v.cvReq.toFixed(2)}</div>
+    </div>
+    <div class="detail-item" style="border-color:var(--green)">
+      <div class="d-label">Cv Máx.</div>
+      <div class="d-value">${v.cvMax.toFixed(1)}</div>
+    </div>
+    <div class="detail-item" style="border-color:var(--warn)">
+      <div class="d-label">Tamaño</div>
+      <div class="d-value">${v.size}"</div>
+    </div>
+    <div class="detail-item" style="border-color:var(--warn)">
+      <div class="d-label">Puerto</div>
+      <div class="d-value">${v.port}" / ${v.portMm}mm</div>
+    </div>
+    ${v.pressureAdm !== null ? `
+    <div class="detail-item" style="border-color:var(--red)">
+      <div class="d-label" style="color:var(--red)">Presión Admisible</div>
+      <div class="d-value" style="color:var(--red)">${v.pressureAdm} bar</div>
+    </div>` : ''}
+  `;
+
+      const q = window._q;
+      document.getElementById('gaugesArea').innerHTML = `
+    <div class="gauge-row">
+      <div class="gauge-icon" style="background:rgba(74,158,255,0.15)">💧</div>
+      <div class="gauge-info">
+        <div class="gauge-label">Caudal de operación</div>
+        <div class="gauge-value" style="color:var(--accent)">${q.toFixed(1)} m³/h</div>
+        <div class="gauge-track">
+          <div class="gauge-fill" style="width:${Math.min(100, q / 200 * 100)}%;background:var(--accent)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="gauge-row">
+      <div class="gauge-icon" style="background:rgba(0,212,170,0.15)">⚡</div>
+      <div class="gauge-info">
+        <div class="gauge-label">Utilización de Cv (${v.cvReq.toFixed(2)} / ${v.cvMax.toFixed(1)})</div>
+        <div class="gauge-value" style="color:var(--green)">${(v.cvReq / v.cvMax * 100).toFixed(1)}%</div>
+        <div class="gauge-track">
+          <div class="gauge-fill" style="width:${v.cvReq / v.cvMax * 100}%;background:var(--green)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="gauge-row">
+      <div class="gauge-icon" style="background:rgba(255,179,71,0.15)">🎚️</div>
+      <div class="gauge-info">
+        <div class="gauge-label">Posición del obturador</div>
+        <div class="gauge-value" style="color:var(--warn)">${v.apertura.toFixed(1)}% abierto</div>
+        <div class="gauge-track">
+          <div class="gauge-fill" style="width:${v.apertura}%;background:var(--warn)"></div>
+        </div>
+      </div>
+    </div>
+  `;
+    }
+
+    // ===== COLUMN SORTING =====
+    window._sortCol = null;
+    window._sortDir = 'asc'; // 'asc' | 'desc'
+
+    function sortArrow(col) {
+      if (window._sortCol !== col) return '▲';
+      return window._sortDir === 'asc' ? '▲' : '▼';
+    }
+
+    function sortClass(col) {
+      if (window._sortCol !== col) return '';
+      return window._sortDir === 'asc' ? ' sort-asc' : ' sort-desc';
+    }
+
+    function toggleSort(col) {
+      if (window._sortCol === col) {
+        window._sortDir = window._sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        window._sortCol = col;
+        window._sortDir = 'asc';
+      }
+      aplicarFiltroOrden();
+    }
+
+    function sizeToNumber(str) {
+      // Convierte tamaños tipo "2-1/2" o "1 & 1-1/4" a un valor numérico aproximado
+      if (str == null) return 0;
+      const s = String(str).split('&')[0].trim();
+      const parts = s.split('-');
+      let total = 0;
+      parts.forEach(p => {
+        if (p.includes('/')) {
+          const [num, den] = p.split('/').map(Number);
+          if (den) total += num / den;
+        } else {
+          const n = parseFloat(p);
+          if (!isNaN(n)) total += n;
+        }
+      });
+      return total;
+    }
+
+    function getSortValue(v, col) {
+      switch (col) {
+        case 'modelo': return (v.modelo || '').toString().toLowerCase();
+        case 'clase': return (v.clase || '').toString().toLowerCase();
+        case 'jaula': return (v.jaula || '').toString().toLowerCase();
+        case 'size': return sizeToNumber(v.size);
+        case 'portMm': return Number(v.portMm) || 0;
+        case 'apertura': return Number(v.apertura) || 0;
+        case 'cvMax': return Number(v.cvMax) || 0;
+        case 'pressureAdm': return v.pressureAdm === null || v.pressureAdm === undefined ? -Infinity : Number(v.pressureAdm);
+        default: return 0;
+      }
+    }
+
+    // ===== INIT =====
+    window.addEventListener('load', () => {
+    });
+    function aplicarFiltroOrden() {
+      let lista = [...(window._valvulasTodas || [])];
+      const filtro = document.getElementById('filtroModelo')?.value || '';
+      const orden = document.getElementById('ordenApertura')?.value || '';
+      if (filtro) lista = lista.filter(v => v.modelo === filtro);
+      if (orden === 'asc') lista.sort((a, b) => a.apertura - b.apertura);
+      if (orden === 'desc') lista.sort((a, b) => b.apertura - a.apertura);
+
+      if (window._sortCol) {
+        const col = window._sortCol;
+        const dir = window._sortDir === 'asc' ? 1 : -1;
+        lista.sort((a, b) => {
+          const va = getSortValue(a, col);
+          const vb = getSortValue(b, col);
+          if (va < vb) return -1 * dir;
+          if (va > vb) return 1 * dir;
+          return 0;
+        });
+      }
+
+      const tablaDiv = document.getElementById('tablaResultados');
+      if (!tablaDiv) return;
+      if (!lista.length) {
+        tablaDiv.innerHTML = '<div style="color:var(--muted);font-size:0.82rem;padding:16px">Sin resultados con ese filtro.</div>';
+        document.getElementById('valveVizPanel').style.display = 'none';
+        return;
+      }
+
+      // Re-index for click selection against filtered list
+      window._valvulas = lista;
+
+      let html = `<table><thead><tr>
+    <th class="sortable${sortClass('modelo')}" onclick="toggleSort('modelo')">Modelo<button class="sort-btn">${sortArrow('modelo')}</button></th>
+    <th class="sortable${sortClass('clase')}" onclick="toggleSort('clase')">Clase<button class="sort-btn">${sortArrow('clase')}</button></th>
+    <th class="sortable${sortClass('jaula')}" onclick="toggleSort('jaula')">Jaula<button class="sort-btn">${sortArrow('jaula')}</button></th>
+    <th class="sortable${sortClass('size')}" onclick="toggleSort('size')">Tamaño<button class="sort-btn">${sortArrow('size')}</button></th>
+    <th class="sortable${sortClass('portMm')}" onclick="toggleSort('portMm')">Puerto<button class="sort-btn">${sortArrow('portMm')}</button></th>
+    <th class="sortable${sortClass('apertura')}" onclick="toggleSort('apertura')">Apertura Estimada<button class="sort-btn">${sortArrow('apertura')}</button></th>
+    <th class="sortable${sortClass('cvMax')}" onclick="toggleSort('cvMax')">Cv max<button class="sort-btn">${sortArrow('cvMax')}</button></th>
+    <th class="sortable${sortClass('pressureAdm')}" onclick="toggleSort('pressureAdm')">P. Adm.<button class="sort-btn">${sortArrow('pressureAdm')}</button></th>
+  </tr></thead><tbody>`;
+
+      lista.forEach((v, i) => {
+        const fillColor = v.apertura > 80 ? 'var(--red)' : v.apertura > 50 ? 'var(--warn)' : 'var(--green)';
+        const pressCell = v.pressureAdm !== null ? `${v.pressureAdm} bar` : '<span style="color:var(--muted)">—</span>';
+        html += `<tr class="result-row" onclick="selectValve(${i})" id="row_${i}">
+      <td><b>${v.modelo}</b></td>
+      <td><span class="badge-clase">${v.clase}</span></td>
+      <td>${v.jaula}</td>
+      <td>${v.size}"</td>
+      <td>${v.port}"<br><span style="color:var(--muted);font-size:0.72rem">${v.portMm} mm</span></td>
+      <td>
+        <div class="apertura-bar">
+          <div class="bar-track"><div class="bar-fill" style="width:${v.apertura}%;background:${fillColor}"></div></div>
+          <span class="bar-pct" style="color:${fillColor}">${v.apertura.toFixed(1)}%</span>
+        </div>
+      </td>
+      <td>${v.cvMax.toFixed(1)}</td>
+      <td>${pressCell}</td>
+    </tr>`;
+      });
+      html += '</tbody></table>';
+      tablaDiv.innerHTML = html;
+      selectValve(0);
+    }
+  </script>
+</body>
+
+</html>

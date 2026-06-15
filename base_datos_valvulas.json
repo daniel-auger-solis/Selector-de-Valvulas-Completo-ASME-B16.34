@@ -1,0 +1,780 @@
+{
+    "archivos_procesados": [
+        "Fisher_Globo_ED_CL125-600_Linear-Cage.xlsx"
+    ],
+    "valvulas": [
+        {
+            "archivo_origen": "Fisher_Globo_ED_CL125-600_Linear-Cage.xlsx",
+            "especificaciones": {
+                "fabricante": "Fisher",
+                "tipo_valvula": "Globo",
+                "modelo": "ED",
+                "clase_presion": "CL125-600",
+                "tipo_jaula": "Linear-Cage",
+                "rango_tamanos": "Completo"
+            },
+            "datos_tabla": [
+                {
+                    "valve_size_inches": "1 & 1-1/4",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 3.21,
+                        "20%": 5.5,
+                        "30%": 8.18,
+                        "40%": 10.9,
+                        "50%": 13.2,
+                        "60%": 15.0,
+                        "70%": 16.9,
+                        "80%": 18.6,
+                        "90%": 19.9,
+                        "100%": 20.6
+                    }
+                },
+                {
+                    "valve_size_inches": "1 & 1-1/4",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 2.78,
+                        "20%": 4.76,
+                        "30%": 7.08,
+                        "40%": 9.43,
+                        "50%": 11.4,
+                        "60%": 13.0,
+                        "70%": 14.6,
+                        "80%": 16.1,
+                        "90%": 17.2,
+                        "100%": 17.8
+                    }
+                },
+                {
+                    "valve_size_inches": "1 & 1-1/4",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.34,
+                        "20%": 0.644,
+                        "30%": 0.494,
+                        "40%": 0.509,
+                        "50%": 0.532,
+                        "60%": 0.58,
+                        "70%": 0.61,
+                        "80%": 0.629,
+                        "90%": 0.628,
+                        "100%": 0.636
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 4.23,
+                        "20%": 7.84,
+                        "30%": 11.8,
+                        "40%": 15.8,
+                        "50%": 20.4,
+                        "60%": 25.3,
+                        "70%": 30.3,
+                        "80%": 34.7,
+                        "90%": 37.2,
+                        "100%": 39.2
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 3.66,
+                        "20%": 6.78,
+                        "30%": 10.2,
+                        "40%": 13.7,
+                        "50%": 17.6,
+                        "60%": 21.9,
+                        "70%": 26.2,
+                        "80%": 30.0,
+                        "90%": 32.2,
+                        "100%": 33.9
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.656,
+                        "20%": 0.709,
+                        "30%": 0.758,
+                        "40%": 0.799,
+                        "50%": 0.738,
+                        "60%": 0.729,
+                        "70%": 0.708,
+                        "80%": 0.686,
+                        "90%": 0.683,
+                        "100%": 0.656
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Fd",
+                    "aperturas": {
+                        "10%": 0.3,
+                        "20%": 0.37,
+                        "30%": 0.41,
+                        "40%": 0.44,
+                        "50%": 0.44,
+                        "60%": 0.41,
+                        "70%": 0.38,
+                        "80%": 0.35,
+                        "90%": 0.34,
+                        "100%": 0.34
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 2.92,
+                        "20%": 5.7,
+                        "30%": 9.05,
+                        "40%": 12.5,
+                        "50%": 15.6,
+                        "60%": 18.5,
+                        "70%": 21.1,
+                        "80%": 23.9,
+                        "90%": 26.8,
+                        "100%": 29.2
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 2.53,
+                        "20%": 4.93,
+                        "30%": 7.83,
+                        "40%": 10.8,
+                        "50%": 13.5,
+                        "60%": 16.0,
+                        "70%": 18.3,
+                        "80%": 20.7,
+                        "90%": 23.2,
+                        "100%": 25.3
+                    }
+                },
+                {
+                    "valve_size_inches": "1-1/2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.69,
+                        "20%": 0.651,
+                        "30%": 0.633,
+                        "40%": 0.634,
+                        "50%": 0.65,
+                        "60%": 0.666,
+                        "70%": 0.708,
+                        "80%": 0.718,
+                        "90%": 0.737,
+                        "100%": 0.733
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 7.87,
+                        "20%": 16.0,
+                        "30%": 24.9,
+                        "40%": 33.4,
+                        "50%": 42.1,
+                        "60%": 51.8,
+                        "70%": 62.0,
+                        "80%": 68.1,
+                        "90%": 70.6,
+                        "100%": 72.9
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 6.81,
+                        "20%": 13.8,
+                        "30%": 21.5,
+                        "40%": 28.9,
+                        "50%": 36.4,
+                        "60%": 44.8,
+                        "70%": 53.6,
+                        "80%": 58.9,
+                        "90%": 61.1,
+                        "100%": 63.1
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.641,
+                        "20%": 0.72,
+                        "30%": 0.728,
+                        "40%": 0.767,
+                        "50%": 0.793,
+                        "60%": 0.754,
+                        "70%": 0.683,
+                        "80%": 0.658,
+                        "90%": 0.652,
+                        "100%": 0.638
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "Fd",
+                    "aperturas": {
+                        "10%": 0.3,
+                        "20%": 0.35,
+                        "30%": 0.36,
+                        "40%": 0.37,
+                        "50%": 0.37,
+                        "60%": 0.36,
+                        "70%": 0.35,
+                        "80%": 0.35,
+                        "90%": 0.34,
+                        "100%": 0.33
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 3.53,
+                        "20%": 6.36,
+                        "30%": 9.92,
+                        "40%": 13.3,
+                        "50%": 16.5,
+                        "60%": 19.7,
+                        "70%": 22.7,
+                        "80%": 25.6,
+                        "90%": 29.3,
+                        "100%": 33.3
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 3.05,
+                        "20%": 5.5,
+                        "30%": 8.58,
+                        "40%": 11.5,
+                        "50%": 14.3,
+                        "60%": 17.0,
+                        "70%": 19.6,
+                        "80%": 22.1,
+                        "90%": 25.3,
+                        "100%": 28.8
+                    }
+                },
+                {
+                    "valve_size_inches": "2",
+                    "port_diameter_inches": "1-5/16",
+                    "port_diameter_mm": 33.3,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.456,
+                        "20%": 0.529,
+                        "30%": 0.549,
+                        "40%": 0.582,
+                        "50%": 0.611,
+                        "60%": 0.633,
+                        "70%": 0.671,
+                        "80%": 0.723,
+                        "90%": 0.727,
+                        "100%": 0.694
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 9.34,
+                        "20%": 21.6,
+                        "30%": 35.5,
+                        "40%": 49.5,
+                        "50%": 62.7,
+                        "60%": 74.1,
+                        "70%": 83.6,
+                        "80%": 93.5,
+                        "90%": 102.0,
+                        "100%": 108.0
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 8.08,
+                        "20%": 18.7,
+                        "30%": 30.7,
+                        "40%": 42.8,
+                        "50%": 54.2,
+                        "60%": 64.1,
+                        "70%": 72.3,
+                        "80%": 80.9,
+                        "90%": 88.2,
+                        "100%": 93.4
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.68,
+                        "20%": 0.66,
+                        "30%": 0.644,
+                        "40%": 0.669,
+                        "50%": 0.674,
+                        "60%": 0.706,
+                        "70%": 0.716,
+                        "80%": 0.687,
+                        "90%": 0.658,
+                        "100%": 0.641
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Fd",
+                    "aperturas": {
+                        "10%": 0.27,
+                        "20%": 0.33,
+                        "30%": 0.35,
+                        "40%": 0.36,
+                        "50%": 0.35,
+                        "60%": 0.34,
+                        "70%": 0.32,
+                        "80%": 0.29,
+                        "90%": 0.27,
+                        "100%": 0.27
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 4.1,
+                        "20%": 8.09,
+                        "30%": 12.3,
+                        "40%": 16.7,
+                        "50%": 21.1,
+                        "60%": 26.8,
+                        "70%": 33.7,
+                        "80%": 41.3,
+                        "90%": 49.2,
+                        "100%": 57.0
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 3.55,
+                        "20%": 7.0,
+                        "30%": 10.6,
+                        "40%": 14.4,
+                        "50%": 18.3,
+                        "60%": 23.2,
+                        "70%": 29.2,
+                        "80%": 35.7,
+                        "90%": 42.6,
+                        "100%": 49.3
+                    }
+                },
+                {
+                    "valve_size_inches": "2-1/2",
+                    "port_diameter_inches": "1-7/8",
+                    "port_diameter_mm": 47.6,
+                    "maximum_travel_inches": "3/4",
+                    "maximum_travel_mm": 19.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.668,
+                        "20%": 0.646,
+                        "30%": 0.684,
+                        "40%": 0.688,
+                        "50%": 0.698,
+                        "60%": 0.694,
+                        "70%": 0.678,
+                        "80%": 0.668,
+                        "90%": 0.669,
+                        "100%": 0.666
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "3-7/16",
+                    "port_diameter_mm": 87.3,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 14.5,
+                        "20%": 32.9,
+                        "30%": 52.1,
+                        "40%": 70.4,
+                        "50%": 88.5,
+                        "60%": 105.0,
+                        "70%": 118.0,
+                        "80%": 133.0,
+                        "90%": 142.0,
+                        "100%": 148.0
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "3-7/16",
+                    "port_diameter_mm": 87.3,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 12.5,
+                        "20%": 28.5,
+                        "30%": 45.1,
+                        "40%": 60.9,
+                        "50%": 76.6,
+                        "60%": 90.8,
+                        "70%": 102.0,
+                        "80%": 115.0,
+                        "90%": 123.0,
+                        "100%": 128.0
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "3-7/16",
+                    "port_diameter_mm": 87.3,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.671,
+                        "20%": 0.699,
+                        "30%": 0.697,
+                        "40%": 0.72,
+                        "50%": 0.733,
+                        "60%": 0.718,
+                        "70%": 0.707,
+                        "80%": 0.65,
+                        "90%": 0.63,
+                        "100%": 0.62
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "3-7/16",
+                    "port_diameter_mm": 87.3,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Fd",
+                    "aperturas": {
+                        "10%": 0.26,
+                        "20%": 0.32,
+                        "30%": 0.35,
+                        "40%": 0.36,
+                        "50%": 0.36,
+                        "60%": 0.36,
+                        "70%": 0.36,
+                        "80%": 0.28,
+                        "90%": 0.29,
+                        "100%": 0.3
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 8.06,
+                        "20%": 16.9,
+                        "30%": 26.7,
+                        "40%": 37.5,
+                        "50%": 49.0,
+                        "60%": 61.4,
+                        "70%": 73.8,
+                        "80%": 85.3,
+                        "90%": 94.7,
+                        "100%": 102.0
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 6.97,
+                        "20%": 14.6,
+                        "30%": 23.1,
+                        "40%": 32.4,
+                        "50%": 42.4,
+                        "60%": 53.1,
+                        "70%": 63.8,
+                        "80%": 73.8,
+                        "90%": 81.9,
+                        "100%": 88.2
+                    }
+                },
+                {
+                    "valve_size_inches": "3",
+                    "port_diameter_inches": "2-5/16",
+                    "port_diameter_mm": 58.7,
+                    "maximum_travel_inches": "1-1/8",
+                    "maximum_travel_mm": 29.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.592,
+                        "20%": 0.614,
+                        "30%": 0.662,
+                        "40%": 0.672,
+                        "50%": 0.674,
+                        "60%": 0.676,
+                        "70%": 0.694,
+                        "80%": 0.722,
+                        "90%": 0.736,
+                        "100%": 0.732
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "4-3/8",
+                    "port_diameter_mm": 111.1,
+                    "maximum_travel_inches": "2",
+                    "maximum_travel_mm": 51.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 23.3,
+                        "20%": 50.3,
+                        "30%": 78.1,
+                        "40%": 105.0,
+                        "50%": 127.0,
+                        "60%": 152.0,
+                        "70%": 181.0,
+                        "80%": 203.0,
+                        "90%": 223.0,
+                        "100%": 236.0
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "4-3/8",
+                    "port_diameter_mm": 111.1,
+                    "maximum_travel_inches": "2",
+                    "maximum_travel_mm": 51.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 20.2,
+                        "20%": 43.5,
+                        "30%": 67.6,
+                        "40%": 90.8,
+                        "50%": 110.0,
+                        "60%": 131.0,
+                        "70%": 157.0,
+                        "80%": 176.0,
+                        "90%": 193.0,
+                        "100%": 204.0
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "4-3/8",
+                    "port_diameter_mm": 111.1,
+                    "maximum_travel_inches": "2",
+                    "maximum_travel_mm": 51.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.691,
+                        "20%": 0.714,
+                        "30%": 0.72,
+                        "40%": 0.731,
+                        "50%": 0.764,
+                        "60%": 0.757,
+                        "70%": 0.748,
+                        "80%": 0.762,
+                        "90%": 0.732,
+                        "100%": 0.688
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "4-3/8",
+                    "port_diameter_mm": 111.1,
+                    "maximum_travel_inches": "2",
+                    "maximum_travel_mm": 51.0,
+                    "coeff_type": "Fd",
+                    "aperturas": {
+                        "10%": 0.31,
+                        "20%": 0.36,
+                        "30%": 0.38,
+                        "40%": 0.38,
+                        "50%": 0.37,
+                        "60%": 0.35,
+                        "70%": 0.32,
+                        "80%": 0.3,
+                        "90%": 0.27,
+                        "100%": 0.28
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Cv",
+                    "aperturas": {
+                        "10%": 9.77,
+                        "20%": 22.6,
+                        "30%": 37.2,
+                        "40%": 51.8,
+                        "50%": 65.7,
+                        "60%": 77.5,
+                        "70%": 87.5,
+                        "80%": 97.9,
+                        "90%": 107.0,
+                        "100%": 113.0
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "Kv",
+                    "aperturas": {
+                        "10%": 8.45,
+                        "20%": 19.5,
+                        "30%": 32.2,
+                        "40%": 44.8,
+                        "50%": 56.8,
+                        "60%": 67.0,
+                        "70%": 75.7,
+                        "80%": 84.7,
+                        "90%": 92.6,
+                        "100%": 97.7
+                    }
+                },
+                {
+                    "valve_size_inches": "4",
+                    "port_diameter_inches": "2-7/8",
+                    "port_diameter_mm": 73.0,
+                    "maximum_travel_inches": "1-1/2",
+                    "maximum_travel_mm": 38.0,
+                    "coeff_type": "XT",
+                    "aperturas": {
+                        "10%": 0.926,
+                        "20%": 0.899,
+                        "30%": 0.873,
+                        "40%": 0.904,
+                        "50%": 0.919,
+                        "60%": 0.962,
+                        "70%": 0.972,
+                        "80%": 0.937,
+                        "90%": 0.891,
+                        "100%": 0.872
+                    }
+                }
+            ]
+        }
+    ]
+}
